@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>second hand car</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="main_container">
+      <div class="heading">
+        <div class="logo">
+          <p>SECOND HAND CAR</p>
+        </div>
+        <div class="brand_choice">
+          <label for="brand_of_car">Podaj markę auta:</label>
+          <select class="option_color" name="vehicle" id="brand_of_car">
+            <option class="option_color" value="all">wszystkie</option>
+            <option class="option_color" value="Audi">Audi</option>
+            <option class="option_color" value="BMW">BMW</option>
+            <option class="option_color" value="Volkswagen">Volkswagen</option>
+          </select>
+          <button class="search btn_main" id="search_button">Wyświetl</button>
+        </div>
+
+        <button class="chosen btn_main" id="chosen_button">
+          Auta przeglądane
+        </button>
+      </div>
+      <video
+        class="background_video"
+        src="video/traffic.mp4"
+        autoplay
+        loop
+        muted
+      ></video>
+      <div class="on_main_container">
+        <h1 class="on_main_title">Z nami zawsze dotrzesz do celu</h1>
+
+        <p class="on_main_paragraph">
+          Prezentujemy Państwu szeroką gamę używanych samochodów sprawdzonych
+          przez naszych fachowców
+        </p>
+      </div>
+      <footer>
+        <p>Wszelkie prawa zastrzeżone</p>
+      </footer>
+    </div>
+    <div id="cars_container"></div>
+    <div id="form_container"></div>
+    <div id="summary_container"></div>
+  </body>
+  <script src="index.js"></script>
+</html>

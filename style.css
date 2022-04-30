@@ -1,0 +1,189 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("images/pexels.jpg");
+  background-size: cover;
+}
+
+.background_video {
+  height: 99.5vh;
+  width: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.heading {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+  color: rgb(3, 3, 82);
+  background-color: lightblue;
+  padding: 10px;
+  border: 1px solid rgb(3, 3, 82);
+  border-top: none;
+  border-bottom-right-radius: 15px;
+}
+
+.logo {
+  color: green;
+  font-weight: bold;
+  padding-right: 5px;
+  border-right: 1px dotted rgb(54, 54, 169);
+}
+
+.brand_choice {
+  padding-left: 5px;
+}
+
+.btn_main {
+  height: 45px;
+  width: 100px;
+  color: rgb(3, 3, 82);
+  background-color: lightblue;
+  border: none;
+}
+
+.btn_main:hover {
+  color: lightblue;
+  background-color: rgb(54, 54, 169);
+  border-radius: 5px;
+}
+
+.search {
+  border-right: 1px dotted rgb(54, 54, 169);
+}
+
+.option_color {
+  background-color: rgb(54, 54, 169);
+  color: white;
+}
+.on_main_container {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.on_main_title {
+  font-size: 55px;
+  color: white;
+}
+
+.on_main_paragraph {
+  margin-top: 50px;
+  font-size: 30px;
+  color: rgb(3, 3, 82);
+  background-color: lightblue;
+  padding: 7px;
+  border: 1px solid rgb(3, 3, 82);
+  border-radius: 10px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(26, 172, 220);
+  text-align: center;
+  border-top: 1px dotted rgb(54, 54, 169);
+  width: 100%;
+  opacity: 0.9;
+}
+
+.offer {
+  display: flex;
+  cursor: pointer;
+  border: 10px solid rgb(3, 3, 82);
+  border-radius: 15px;
+  background-color: lightblue;
+  max-width: 800px;
+  margin: 20px auto;
+  align-items: center;
+}
+
+.photo {
+  display: block;
+  max-width: 280px;
+  padding-left: 5px;
+}
+
+.info {
+  display: block;
+  color: rgb(3, 3, 82);
+  max-width: 480px;
+  padding-left: 100px;
+}
+
+.price {
+  display: block;
+  color: red;
+  padding: 60px;
+  font-size: xx-large;
+}
+
+.details {
+  border: 10px solid rgb(3, 3, 82);
+  border-radius: 15px;
+  background-color: lightblue;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 0 20px 60px;
+}
+
+.fromOfferToMain {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: 45px;
+  width: 200px;
+  color: rgb(3, 3, 82);
+  background-color: lightblue;
+  padding: 10px;
+  border: 1px solid rgb(3, 3, 82);
+  border-top: none;
+  border-bottom-right-radius: 15px;
+  cursor: pointer;
+}
+
+.carPrice, .totalPrice {
+  color: red;
+}
+
+.backFromFormToMain {
+  color: lightblue;
+  background-color: rgb(3, 3, 82);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.fromFormToSummary {
+  font-size: 24px;
+  color: red;
+  background-color:rgb(3, 3, 82) ;
+  border-radius: 10px;
+  height: 40px;
+  width: 100px;
+  margin-left: 20px;
+  cursor: pointer;
+
+}
+
+.carBought {
+  border: 10px solid rgb(3, 3, 82);
+  border-radius: 15px;
+  background-color: lightblue;
+  padding: 0 20px;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
