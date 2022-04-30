@@ -1,6 +1,6 @@
 # Second hand car - app helping to buy an used car
 > The app helps customer to find and buy an used car.
-> Link to the app: [_here_](https://www.example.com). 
+> Link to the app: https://kujawa82.github.io/secondhandcar/index.html
 
 
 ## General Information
