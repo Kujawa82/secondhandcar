@@ -75,7 +75,7 @@ const cars = [
   },
 ];
 
-const isShownList = (filteredCars) => {
+const doShowList = (filteredCars) => {
   if (document.getElementById("cars_container") === null) {
     let carsContainer = document.createElement("div");
     carsContainer.id = "cars_container";
@@ -93,7 +93,7 @@ const isShownList = (filteredCars) => {
 
   document.getElementById("backFromOffer").addEventListener(
     "click",
-    (isbacktoMainFromOffer = () => {
+    (doGoBackToMainFromOffer = () => {
       document.getElementById("cars_container").remove();
       document.getElementById("main_container").style.display = "block";
     })
@@ -105,30 +105,29 @@ const isShownList = (filteredCars) => {
     let photo = document.createElement("div");
     photo.classList.add("photo");
 
-    let brand = document.createElement("p");
-    brand.innerText = "Marka: " + filteredCars[i].brand;
-    let model = document.createElement("p");
-    model.innerText = "Model: " + filteredCars[i].model;
-    let capacity = document.createElement("p");
-    capacity.innerText = "Pojemność: " + filteredCars[i].capacity;
-    let power = document.createElement("p");
-    power.innerText = "Moc: " + filteredCars[i].power;
-    let year = document.createElement("p");
-    year.innerText = "Rok: " + filteredCars[i].year;
-    let mileage = document.createElement("p");
-    mileage.innerText = "Przebieg: " + filteredCars[i].mileage;
+    const createP = (text) => {
+      let p = document.createElement("p");
+      p.innerText = text;
+      return p;
+    };
+
+    let brand = createP("Marka: " + filteredCars[i].brand);
+    let model = createP("Model: " + filteredCars[i].model);
+    let capacity = createP("Pojemność: " + filteredCars[i].capacity);
+    let power = createP("Moc: " + filteredCars[i].power);
+    let year = createP("Rok: " + filteredCars[i].year);
+    let mileage = createP("Przebieg: " + filteredCars[i].mileage);
+
     let info = document.createElement("div");
     info.classList.add("info");
+    let priceCar = createP("Cena: " + filteredCars[i].price);
 
-    let priceCar = document.createElement("p");
-    priceCar.innerText = "Cena: " + filteredCars[i].price;
     let price = document.createElement("div");
-
     price.classList.add("price");
 
     let offer = document.createElement("div");
     offer.classList.add("offer");
-    offer.id = i;
+    offer.id = "offer" + i;
 
     photo.appendChild(picture);
 
@@ -146,9 +145,9 @@ const isShownList = (filteredCars) => {
     offer.appendChild(price);
     document.getElementById("cars_container").appendChild(offer);
 
-    document.getElementById(i).addEventListener(
+    document.getElementById("offer" + i).addEventListener(
       "click",
-      (isShownForm = () => {
+      (doShowForm = () => {
         if (document.getElementById("form_container") === null) {
           let formContainer = document.createElement("div");
           formContainer.id = "form_container";
@@ -157,7 +156,7 @@ const isShownList = (filteredCars) => {
 
         document.getElementById("cars_container").style.display = "none";
 
-        let memory = [];
+        let memoryOfOfferedCars = [];
         if (localStorage.getItem("carsMemory")) {
           storage = JSON.parse(localStorage.getItem("carsMemory"));
           addOtherCar = storage.filter(
@@ -167,8 +166,11 @@ const isShownList = (filteredCars) => {
           addOtherCar.push(filteredCars[i]);
           localStorage.setItem("carsMemory", JSON.stringify(addOtherCar));
         } else {
-          memory.push(filteredCars[i]);
-          localStorage.setItem("carsMemory", JSON.stringify(memory));
+          memoryOfOfferedCars.push(filteredCars[i]);
+          localStorage.setItem(
+            "carsMemory",
+            JSON.stringify(memoryOfOfferedCars)
+          );
         }
 
         let form = document.createElement("div");
@@ -191,7 +193,7 @@ const isShownList = (filteredCars) => {
         for (let j = 0; j < accessories.length; j++) {
           let accessoriesAdd = document.createElement("input");
           accessoriesAdd.setAttribute("type", "checkbox");
-          accessoriesAdd.id = j;
+          accessoriesAdd.id = "accessories" + j;
           form.appendChild(accessoriesAdd);
           let accessoriesLabel = document.createElement("label");
           accessoriesLabel.setAttribute("for", j);
@@ -217,9 +219,8 @@ const isShownList = (filteredCars) => {
         let carPriceText2 = document.createElement("h3");
         carPriceText2.innerText = "Całkowta cena akcesoriów";
         form.appendChild(carPriceText2);
+        let carPrice = createP(0);
 
-        let carPrice = document.createElement("p");
-        carPrice.innerText = 0;
         carPrice.classList.add("carPrice");
         form.appendChild(carPrice);
 
@@ -227,10 +228,9 @@ const isShownList = (filteredCars) => {
         carPriceText.innerText = "Całkowaita cena auta z akcesoriami";
         form.appendChild(carPriceText);
 
-        let totalPrice = document.createElement("p");
+        let totalPrice = createP(filteredCars[i].price);
         form.appendChild(totalPrice);
         totalPrice.classList.add("totalPrice");
-        totalPrice.innerText = filteredCars[i].price;
 
         let wayOfPay = document.createElement("h2");
         form.appendChild(wayOfPay);
@@ -277,6 +277,13 @@ const isShownList = (filteredCars) => {
         form.appendChild(nameAndSurnameLabel);
         form.appendChild(nameAndSurname);
 
+        if (localStorage.getItem("nameAndSurnameMemory") !== null) {
+          const memoryBack2 = JSON.parse(
+            localStorage.getItem("nameAndSurnameMemory")
+          );
+          nameAndSurname.value = memoryBack2;
+        }
+
         const lineBreak5 = document.createElement("br");
         form.appendChild(lineBreak5);
         const lineBreak6 = document.createElement("br");
@@ -290,7 +297,8 @@ const isShownList = (filteredCars) => {
 
         document.getElementById("back" + i).addEventListener(
           "click",
-          (isBackFromFormToMain = () => {
+          (doGoBackFromFormToMain = () => {
+            doRenemberPersonalData();
             document.getElementById("form" + i).remove();
             document.getElementById("cars_container").remove();
             document.getElementById("main_container").style.display = "block";
@@ -303,11 +311,18 @@ const isShownList = (filteredCars) => {
         form.appendChild(summary);
         document.getElementById("summary" + i).addEventListener(
           "click",
-          (isShownSummary = () => {
+          (doShowSummary = () => {
+            doRenemberPersonalData();
+            let nameAndSurnameValue = nameAndSurname.value;
+
+            function doValidateName(nameAndSurnameValue) {
+              const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+              return regName.test(nameAndSurnameValue);
+            }
+
             const validateNames =
-              document.getElementById("nameAndSurname").value === "" ||
-              document.getElementById("nameAndSurname").value.indexOf(" ") ===
-                -1;
+              !doValidateName(nameAndSurnameValue) ||
+              nameAndSurnameValue === "";
 
             const validatePayment =
               !document.getElementById("cash").checked &&
@@ -365,15 +380,14 @@ const isShownList = (filteredCars) => {
               backFromSummaryToMain.innerText = `(Za chwilę zostaniesz automatycznie przekierowany na stronę główną)`;
               bought.appendChild(backFromSummaryToMain);
 
-              function isBackToMainFromSummary() {
+              function doGoBackToMainFromSummary() {
                 document.getElementById("cars_container").remove();
                 document.getElementById("form_container").remove();
                 document.getElementById("summary_container").remove();
                 document.getElementById("main_container").style.display =
                   "block";
               }
-
-              setTimeout(isBackToMainFromSummary, 10000);
+              setTimeout(doGoBackToMainFromSummary, 10000);
             }
           })
         );
@@ -382,28 +396,37 @@ const isShownList = (filteredCars) => {
   }
 };
 
-const isChosen = () => {
+function doRenemberPersonalData() {
+  let memoryOfPersonalData = [];
+  memoryOfPersonalData.push(nameAndSurname.value);
+  localStorage.setItem(
+    "nameAndSurnameMemory",
+    JSON.stringify(memoryOfPersonalData)
+  );
+}
+
+const doChoose = () => {
   if (localStorage.getItem("carsMemory") === null) {
     alert(
       "Nie przeglądałeś jeszcze szczegółowo żadnego auta z naszej oferty..."
     );
   } else {
     let memoryBack = JSON.parse(localStorage.getItem("carsMemory"));
-    isShownList(memoryBack);
+    doShowList(memoryBack);
   }
 };
 
-const isSearched = () => {
+const doSearch = () => {
   if (document.getElementById("brand_of_car").value !== "all") {
     const chosenBrand = cars.filter(
       (car) => car.brand === document.getElementById("brand_of_car").value
     );
-    isShownList(chosenBrand);
+    doShowList(chosenBrand);
   } else {
-    isShownList(cars);
+    doShowList(cars);
   }
 };
 
-document.getElementById("search_button").addEventListener("click", isSearched);
+document.getElementById("search_button").addEventListener("click", doSearch);
 
-document.getElementById("chosen_button").addEventListener("click", isChosen);
+document.getElementById("chosen_button").addEventListener("click", doChoose);
